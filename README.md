@@ -176,7 +176,7 @@ showDeviceFrame=no
 
 ---
 
-### 3️⃣ / 4️⃣ Start or Restart the Emulator
+### 3️⃣ / 4️⃣ Start or Restart the Emulator Kill/Restart ADB
 
 You can start or restart your S23 Ultra emulator using **either** of the following:
 
