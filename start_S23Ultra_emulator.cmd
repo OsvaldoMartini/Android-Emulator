@@ -7,6 +7,11 @@ REM Purpose: Create (if missing) and start two emulators,
 REM          backup config.ini, and copy custom configs
 REM ============================================================
 
+
+REM --- Define ANDROID_SDK_ROOT and prepend SDK tools to PATH ---
+SET ANDROID_SDK_ROOT=C:\Android
+SET PATH=%ANDROID_SDK_ROOT%\cmdline-tools\latest\bin;%ANDROID_SDK_ROOT%\emulator;%ANDROID_SDK_ROOT%\platform-tools;%PATH%
+
 SET EMULATOR_1=S23Ultra_API34
 SET EMULATOR_2=Pixel_8_API34
 SET DEFAULT_SDK_PATH=D:\Android
