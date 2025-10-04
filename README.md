@@ -176,7 +176,7 @@ showDeviceFrame=no
 
 ---
 
-### 3. Create First the AVD with `avdmanager` S23Ultra_API34
+### 3️⃣  Create First the AVD with `avdmanager` S23Ultra_API34
 
 ```bash
 avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_apis;x86_64"
@@ -184,7 +184,7 @@ avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_ap
 
 ---
 
-### 4. Create Second the AVD with `avdmanager`  Pixel 8 emulator
+### 4️⃣  Create Second the AVD with `avdmanager`  Pixel 8 emulator
 
 ```bash
 avdmanager create avd -n "Pixel8_API34" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8"
