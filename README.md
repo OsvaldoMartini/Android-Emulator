@@ -231,7 +231,14 @@ adb -s emulator-5554 emu kill
 
 ---
 
-> ⚠️ If you get `'emulator' is not recognized`, make sure your PATH includes the emulator folder (`C:\Android\emulator` or `~/Android/emulator`).
+> ⚠️ If you get `'sdkmanager' is not recognized`, make sure your PATH includes the **sdkmanager** folder (`C:\Android\cmdline-tools\latest\bin` or `~/Android/cmdline-tools/latest/bin`).
+
+![SDK Manager Folder](sdkmanager.png)
+
+> ⚠️ If you get `'emulator' is not recognized`, make sure your PATH includes the **emulator*8 folder (`C:\Android\emulator` or `~/Android/emulator`).
+
+> ⚠️ If you get `'adb' is not recognized`, make sure your PATH includes the **adb** folder (`C:\Android\platform-tools` or `~/Android/platform-tools`).
+
 
 ---
 
