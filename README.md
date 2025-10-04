@@ -175,21 +175,27 @@ showDeviceFrame=no
 ```
 
 ---
-### 3️⃣ Restart Emulator and Kill/Start ADB
 
-To restart your S23 Ultra emulator and ensure ADB is working properly, run the script located in the project root:
+### 3️⃣ / 4️⃣ Start or Restart the Emulator
+
+You can start or restart your S23 Ultra emulator using **either** of the following:
+
+**Option 1:** Run the script in the project root (recommended, handles ADB as well):
 
 ```cmd
 start_S23Ultra_emulator.cmd
 ```
 
----
-
-### 4️⃣ Start the Emulator
+**Option 2:** Start the emulator directly via command line:
 
 ```bash
 emulator -avd S23Ultra_API34
 ```
+
+---
+
+Tip: The script ensures the emulator is ready and ADB is running.
+Direct command just starts the emulator without checking ADB status.
 
 ---
 
