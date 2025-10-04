@@ -109,7 +109,7 @@ sdkmanager --licenses
 
 ## 📱 Step 4: Galaxy S23 Ultra Specs
 
-![Galaxy S23 Ultra](images/galaxy-s23-ultra.png)
+![Galaxy S23 Ultra](galaxy-s23-ultra.png)
 
 * **Screen size:** 6.8"
 * **Resolution:** 3088 × 1440 (QHD+)
