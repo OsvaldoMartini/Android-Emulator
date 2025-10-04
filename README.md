@@ -184,24 +184,42 @@ emulator -avd S23Ultra_API34
 
 ---
 
-### 4️⃣ Install APKs to the Emulator
+
+### 4️⃣ Verify Signed Using jarsigner
+
+```bash
+jarsigner -verify -verbose -certs D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0.apk
+```
+---
+
+
+### 5️⃣ Install APKs to the Emulator
 
 ```bash
 adb install D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0.apk
 ```
 
-### 4️⃣ Kill Emulators
+---
+### 6️⃣ Restart Emulator and Kill/Start ADB
 
-```bash
-adb -s emulator-5554 emu kill
+To restart your S23 Ultra emulator and ensure ADB is working properly, run the script located in the project root:
+
+```cmd
+start_S23Ultra_emulator.cmd
 ```
 
-### 4️⃣ Kill Emulators
+### 7️⃣ List Emulators
 
 ```bash
 emulator -list-avds
 ```
 
+
+### 8️⃣ Kill Emulators
+
+```bash
+adb -s emulator-5554 emu kill
+```
 
 
 > ⚠️ If you get `'emulator' is not recognized`, make sure your PATH includes the emulator folder (`C:\Android\emulator` or `~/Android/emulator`).
