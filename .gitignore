@@ -1,0 +1,10 @@
+# Ignorar todos os arquivos .zip
+*.zip
+
+# Opcional: ignorar pastas de build do Android Studio
+/build/
+/app/build/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
