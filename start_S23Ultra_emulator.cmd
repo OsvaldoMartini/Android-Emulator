@@ -5,7 +5,27 @@ REM Purpose: Start Galaxy S23 Ultra emulator and ensure ADB connection
 REM ============================================================
 
 SET EMULATOR_NAME=S23Ultra_API34
-SET SDK_PATH=C:\Android
+SET DEFAULT_SDK_PATH=D:\Android
+
+REM ============================================================
+REM Check if ANDROID_SDK_ROOT system environment variable exists
+REM ============================================================
+set KEY=HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+for /f "tokens=3*" %%a in ('reg query "%KEY%" /v ANDROID_SDK_ROOT 2^>nul') do (
+    SET SDK_PATH=%%a
+)
+
+IF NOT DEFINED SDK_PATH (
+    echo ANDROID_SDK_ROOT not found. Setting it to default: %DEFAULT_SDK_PATH%
+    SET SDK_PATH=%DEFAULT_SDK_PATH%
+    
+    REM Set system environment variable (requires admin privileges)
+    reg add "%KEY%" /v ANDROID_SDK_ROOT /t REG_EXPAND_SZ /d "%SDK_PATH%" /f >nul
+) ELSE (
+    echo Found ANDROID_SDK_ROOT: %SDK_PATH%
+)
+
+REM Add SDK tools to PATH for this session
 SET PATH=%SDK_PATH%\platform-tools;%SDK_PATH%\emulator;%PATH%
 
 echo ============================================================

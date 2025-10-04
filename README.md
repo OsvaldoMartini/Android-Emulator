@@ -182,6 +182,28 @@ showDeviceFrame=no
 emulator -avd S23Ultra_API34
 ```
 
+---
+
+### 4️⃣ Install APKs to the Emulator
+
+```bash
+adb install D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0.apk
+```
+
+### 4️⃣ Kill Emulators
+
+```bash
+adb -s emulator-5554 emu kill
+```
+
+### 4️⃣ Kill Emulators
+
+```bash
+emulator -list-avds
+```
+
+
+
 > ⚠️ If you get `'emulator' is not recognized`, make sure your PATH includes the emulator folder (`C:\Android\emulator` or `~/Android/emulator`).
 
 ---
