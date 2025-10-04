@@ -1,13 +1,17 @@
 @echo off
 REM ============================================================
 REM Script: start_two_emulators.cmd
-REM Purpose: Create (if missing) and start two emulators
+REM Purpose: Create (if missing) and start two emulators,
+REM          backup config.ini, and copy custom configs
 REM ============================================================
 
 SET EMULATOR_1=S23Ultra_API34
 SET EMULATOR_2=Pixel_8_API34
 SET DEFAULT_SDK_PATH=D:\Android
-SET CUSTOM_CONFIG="D:\Projects\Android-Emulator\Galaxy S23 Ultra\config.ini"
+SET CUSTOM_CONFIG_EMU1="D:\Projects\Android-Emulator\S23Ultra_API34\config.ini"
+SET CUSTOM_CONFIG_EMU2="D:\Projects\Android-Emulator\Pixel_8_API34\config.ini"
+
+SET USER_AVD_PATH=%USERPROFILE%\.android\avd
 
 REM ============================================================
 REM Check if ANDROID_SDK_ROOT system environment variable exists
@@ -37,25 +41,37 @@ FOR %%E IN (%EMULATOR_1% %EMULATOR_2%) DO (
     "%SDK_PATH%\emulator\emulator.exe" -list-avds | findstr /i "%%E" >nul
     IF ERRORLEVEL 1 (
         echo AVD %%E not found. Creating...
-        IF "%%E"=="%EMULATOR_1%" (
-            avdmanager create avd -n "%EMULATOR_1%" -k "system-images;android-34;google_apis;x86_64" --force
-        ) ELSE (
-            REM Pixel8 config
-            avdmanager create avd -n "%EMULATOR_2%" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8" --force
-        )
+		IF "%%E"=="%EMULATOR_1%" (
+			echo no | avdmanager create avd -n "%EMULATOR_1%" -k "system-images;android-34;google_apis;x86_64" --device "pixel_7" --force
+		) ELSE (
+			echo no | avdmanager create avd -n "%EMULATOR_2%" -k "system-images;android-34;google_apis;x86_64" --device "pixel_8" --force
+		)
     ) ELSE (
         echo AVD %%E already exists.
     )
 )
 
 REM ============================================================
-REM Copy custom config.ini for S23 emulator only
+REM Backup original config.ini files
 REM ============================================================
-SET USER_AVD_PATH=%USERPROFILE%\.android\avd
+FOR %%E IN (%EMULATOR_1% %EMULATOR_2%) DO (
+    IF EXIST "%USER_AVD_PATH%\%%E.avd\config.ini" (
+        echo Backing up %%E config.ini...
+        copy /Y "%USER_AVD_PATH%\%%E.avd\config.ini" "%USER_AVD_PATH%\%%E.avd\config.ini.bak"
+    )
+)
 
-IF EXIST %CUSTOM_CONFIG% (
+REM ============================================================
+REM Copy custom config.ini for each emulator
+REM ============================================================
+IF EXIST %CUSTOM_CONFIG_EMU1% (
     IF NOT EXIST "%USER_AVD_PATH%\%EMULATOR_1%.avd" mkdir "%USER_AVD_PATH%\%EMULATOR_1%.avd"
-    copy /Y %CUSTOM_CONFIG% "%USER_AVD_PATH%\%EMULATOR_1%.avd\config.ini"
+    copy /Y %CUSTOM_CONFIG_EMU1% "%USER_AVD_PATH%\%EMULATOR_1%.avd\config.ini"
+)
+
+IF EXIST %CUSTOM_CONFIG_EMU2% (
+    IF NOT EXIST "%USER_AVD_PATH%\%EMULATOR_2%.avd" mkdir "%USER_AVD_PATH%\%EMULATOR_2%.avd"
+    copy /Y %CUSTOM_CONFIG_EMU2% "%USER_AVD_PATH%\%EMULATOR_2%.avd\config.ini"
 )
 
 REM ============================================================
