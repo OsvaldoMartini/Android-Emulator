@@ -98,6 +98,13 @@ sdkmanager --list
   sdkmanager "platform-tools" "platforms;android-36" "emulator" "system-images;android-36;google_apis;x86_64"
   ```
 
+## 📌 Accept All SDK Licenses
+Run the following command to accept all licenses:
+
+```bash
+sdkmanager --licenses
+```
+
 ---
 
 ## 📱 Step 4: Galaxy S23 Ultra Specs
