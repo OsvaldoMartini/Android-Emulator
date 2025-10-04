@@ -74,10 +74,10 @@ sdkmanager --list
 
 ## 📌 Step 3: API Level Setup
 
-* **Android 15 Preview – API 35**
+* **Android 13 (Older S23 Ultra OS) – API 33**
 
   ```bash
-  sdkmanager "platform-tools" "platforms;android-35" "emulator" "system-images;android-35;google_apis;x86_64"
+  sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
   ```
 
 * **Android 14 (Current S23 Ultra OS) – API 34**
@@ -86,10 +86,16 @@ sdkmanager --list
   sdkmanager "platform-tools" "platforms;android-34" "emulator" "system-images;android-34;google_apis;x86_64"
   ```
 
-* **Android 13 (Older S23 Ultra OS) – API 33**
+* **Android 15 Preview – API 35**
 
   ```bash
-  sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
+  sdkmanager "platform-tools" "platforms;android-35" "emulator" "system-images;android-35;google_apis;x86_64"
+  ```
+
+* **Android 15 Preview – API 36**
+
+  ```bash
+  sdkmanager "platform-tools" "platforms;android-36" "emulator" "system-images;android-36;google_apis;x86_64"
   ```
 
 ---
