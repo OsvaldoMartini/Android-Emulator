@@ -176,7 +176,22 @@ showDeviceFrame=no
 
 ---
 
-### 3️⃣ / 4️⃣ Start or Restart the Emulator Kill/Restart ADB
+### 3. Create First the AVD with `avdmanager` S23Ultra_API34
+
+```bash
+avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_apis;x86_64"
+```
+
+---
+
+### 4. Create Second the AVD with `avdmanager`  Pixel 8 emulator
+
+```bash
+avdmanager create avd -n "Pixel8_API34" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8"
+```
+
+
+### 5️⃣ Start or Restart the Emulator Kill/Restart ADB
 
 You can start or restart your S23 Ultra emulator using **either** of the following:
 
@@ -189,7 +204,9 @@ start_S23Ultra_emulator.cmd
 **Option 2:** Start the emulator directly via command line:
 
 ```bash
-emulator -avd S23Ultra_API34
+emulator -avd S23Ultra_API34 -port 5555
+
+emulator -avd Pixel_7_API_34 -port 5566 
 ```
 
 ---
@@ -199,7 +216,7 @@ Direct command just starts the emulator without checking ADB status.
 
 ---
 
-### 5️⃣ Verify Signed Using jarsigner
+### 6️⃣ Verify Signed Using jarsigner
 
 ```bash
 jarsigner -verify -verbose -certs D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0.apk
@@ -207,7 +224,7 @@ jarsigner -verify -verbose -certs D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0
 
 ---
 
-### 6️⃣ Install APKs to the Emulator
+### 7️⃣ Install APKs to the Emulator
 
 ```bash
 adb install D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0.apk
@@ -215,7 +232,7 @@ adb install D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0.apk
 
 ---
 
-### 7️⃣ List Emulators
+### 8️⃣ List Emulators
 
 ```bash
 emulator -list-avds
@@ -223,7 +240,7 @@ emulator -list-avds
 
 ---
 
-### 8️⃣ Kill Emulators
+### 9️⃣ Kill Emulators
 
 ```bash
 adb -s emulator-5554 emu kill
@@ -239,7 +256,7 @@ adb -s emulator-5554 emu kill
 
 ---
 
-### 9️⃣ Important Tools: SDK Manager, etc.
+### 10️⃣ Important Tools: SDK Manager, etc.
 
 > ⚠️ Note: Ensure your PATH includes the `cmdline-tools/latest/bin` folder so that these `.bat` files can be run from any terminal.
 

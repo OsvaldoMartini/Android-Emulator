@@ -1,10 +1,11 @@
 @echo off
 REM ============================================================
-REM Script: start_S23Ultra_emulator.cmd
-REM Purpose: Start Galaxy S23 Ultra emulator and ensure ADB connection
+REM Script: start_two_emulators.cmd
+REM Purpose: Start two emulators and ensure both ADB connections
 REM ============================================================
 
-SET EMULATOR_NAME=S23Ultra_API34
+SET EMULATOR_1=S23Ultra_API34
+SET EMULATOR_2=Pixel_7_API34
 SET DEFAULT_SDK_PATH=D:\Android
 
 REM ============================================================
@@ -33,27 +34,35 @@ echo Killing old ADB servers...
 adb kill-server
 
 echo ============================================================
-echo Starting emulator: %EMULATOR_NAME%
-start "" "%SDK_PATH%\emulator\emulator.exe" -avd %EMULATOR_NAME% -no-snapshot-load
+echo Starting emulator: %EMULATOR_1%
+start "" "%SDK_PATH%\emulator\emulator.exe" -avd %EMULATOR_1% -no-snapshot-load
+
+echo Starting emulator: %EMULATOR_2%
+start "" "%SDK_PATH%\emulator\emulator.exe" -avd %EMULATOR_2% -no-snapshot-load
 
 echo ============================================================
-echo Waiting for emulator to boot...
+echo Waiting for both emulators to boot...
 
 :WAIT_LOOP
-REM Check if emulator is listed and online
+SET EMU1_OK=0
+SET EMU2_OK=0
+
 FOR /F "tokens=1,2" %%i IN ('adb devices ^| findstr emulator') DO (
     IF "%%j"=="device" (
-        echo Emulator is online!
-        GOTO CONNECTED
+        IF "%%i"=="emulator-5554" SET EMU1_OK=1
+        IF "%%i"=="emulator-5556" SET EMU2_OK=1
     )
 )
+
+IF "%EMU1_OK%"=="1" IF "%EMU2_OK%"=="1" GOTO CONNECTED
+
 REM Wait 5 seconds before checking again
 timeout /t 5 >nul
 GOTO WAIT_LOOP
 
 :CONNECTED
 echo ============================================================
-echo Emulator %EMULATOR_NAME% is ready and connected via ADB!
+echo Both emulators are online!
 adb devices
 echo ============================================================
 echo You can now run adb commands or start your tests.

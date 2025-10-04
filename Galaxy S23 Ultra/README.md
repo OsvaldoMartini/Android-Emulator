@@ -66,13 +66,19 @@ showDeviceFrame=no
 
 ## 🔹 Steps to Apply
 
-### 1. Create the AVD with `avdmanager`
+### 1. Create First the AVD with `avdmanager` S23Ultra_API34
 
 ```bash
 avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_apis;x86_64"
 ```
+### 3. Create Second the AVD with `avdmanager`  Pixel 8 emulator
 
-### 2. Locate the AVD Folder
+```bash
+avdmanager create avd -n "Pixel8_API34" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8"
+```
+
+
+### 3. Locate the AVD Folder
 
 * **Linux/Mac:**
 
@@ -85,11 +91,11 @@ avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_ap
   %USERPROFILE%\.android\avd\S23Ultra_API34.avd\
   ```
 
-### 3. Replace Config
+### 4. Replace Config
 
 Replace the existing **`config.ini`** with the custom version provided above.
 
-### 4. Start the Emulator
+### 5. Start the Emulator
 
 ```bash
 emulator -avd S23Ultra_API34
