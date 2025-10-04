@@ -241,6 +241,8 @@ adb -s emulator-5554 emu kill
 
 ### 9️⃣ Important Tools: SDK Manager, etc.
 
+> ⚠️ Note: Ensure your PATH includes the `cmdline-tools/latest/bin` folder so that these `.bat` files can be run from any terminal.
+
 Below is a description of the `.bat` files located in your Android SDK folder (`cmdline-tools/latest/bin`):
 
 | File                     | Purpose                                                                                                              |
@@ -259,9 +261,6 @@ Below is a description of the `.bat` files located in your Android SDK folder (`
 ---
 
 ![SDK Manager Tools](sdkmanager.png)
-
-> ⚠️ Note: Ensure your PATH includes the `cmdline-tools/latest/bin` folder so that these `.bat` files can be run from any terminal.
-
 
 ---
 
