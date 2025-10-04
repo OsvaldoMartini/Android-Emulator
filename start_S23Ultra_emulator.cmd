@@ -1,12 +1,13 @@
 @echo off
 REM ============================================================
 REM Script: start_two_emulators.cmd
-REM Purpose: Start two emulators and ensure both ADB connections
+REM Purpose: Create (if missing) and start two emulators
 REM ============================================================
 
 SET EMULATOR_1=S23Ultra_API34
-SET EMULATOR_2=Pixel_7_API34
+SET EMULATOR_2=Pixel_8_API34
 SET DEFAULT_SDK_PATH=D:\Android
+SET CUSTOM_CONFIG="D:\Projects\Android-Emulator\Galaxy S23 Ultra\config.ini"
 
 REM ============================================================
 REM Check if ANDROID_SDK_ROOT system environment variable exists
@@ -29,18 +30,46 @@ IF NOT DEFINED SDK_PATH (
 REM Add SDK tools to PATH for this session
 SET PATH=%SDK_PATH%\platform-tools;%SDK_PATH%\emulator;%PATH%
 
-echo ============================================================
+REM ============================================================
+REM Check if AVDs exist, create if missing
+REM ============================================================
+FOR %%E IN (%EMULATOR_1% %EMULATOR_2%) DO (
+    "%SDK_PATH%\emulator\emulator.exe" -list-avds | findstr /i "%%E" >nul
+    IF ERRORLEVEL 1 (
+        echo AVD %%E not found. Creating...
+        IF "%%E"=="%EMULATOR_1%" (
+            avdmanager create avd -n "%EMULATOR_1%" -k "system-images;android-34;google_apis;x86_64" --force
+        ) ELSE (
+            REM Pixel8 config
+            avdmanager create avd -n "%EMULATOR_2%" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8" --force
+        )
+    ) ELSE (
+        echo AVD %%E already exists.
+    )
+)
+
+REM ============================================================
+REM Copy custom config.ini for S23 emulator only
+REM ============================================================
+SET USER_AVD_PATH=%USERPROFILE%\.android\avd
+
+IF EXIST %CUSTOM_CONFIG% (
+    IF NOT EXIST "%USER_AVD_PATH%\%EMULATOR_1%.avd" mkdir "%USER_AVD_PATH%\%EMULATOR_1%.avd"
+    copy /Y %CUSTOM_CONFIG% "%USER_AVD_PATH%\%EMULATOR_1%.avd\config.ini"
+)
+
+REM ============================================================
 echo Killing old ADB servers...
 adb kill-server
 
-echo ============================================================
+REM ============================================================
 echo Starting emulator: %EMULATOR_1%
 start "" "%SDK_PATH%\emulator\emulator.exe" -avd %EMULATOR_1% -no-snapshot-load
 
 echo Starting emulator: %EMULATOR_2%
 start "" "%SDK_PATH%\emulator\emulator.exe" -avd %EMULATOR_2% -no-snapshot-load
 
-echo ============================================================
+REM ============================================================
 echo Waiting for both emulators to boot...
 
 :WAIT_LOOP

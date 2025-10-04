@@ -187,7 +187,7 @@ avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_ap
 ### 4️⃣  Create Second the AVD with `avdmanager`  Pixel 8 emulator
 
 ```bash
-avdmanager create avd -n "Pixel8_API34" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8"
+avdmanager create avd -n "Pixel_8_API34" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8"
 ```
 
 
@@ -206,7 +206,7 @@ start_S23Ultra_emulator.cmd
 ```bash
 emulator -avd S23Ultra_API34 -port 5555
 
-emulator -avd Pixel_7_API_34 -port 5566 
+emulator -avd Pixel_8_API34 -port 5566 
 ```
 
 ---
