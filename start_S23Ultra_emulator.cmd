@@ -14,9 +14,11 @@ REM SET PATH=%ANDROID_SDK_ROOT%\cmdline-tools\latest\bin;%ANDROID_SDK_ROOT%\emul
 
 SET EMULATOR_1=S23Ultra_API34
 SET EMULATOR_2=Pixel_8_API34
-SET DEFAULT_SDK_PATH=D:\Android
-SET CUSTOM_CONFIG_EMU1=D:\Projects\Android-Emulator\S23Ultra_API34\config.ini
-SET CUSTOM_CONFIG_EMU2=D:\Projects\Android-Emulator\Pixel_8_API34\config.ini
+SET DEFAULT_SDK_PATH=C:\Android
+REM Use current folder as base for custom configs
+SET CURRENT_FOLDER=%CD%
+SET CUSTOM_CONFIG_EMU1=%CURRENT_FOLDER%\%EMULATOR_1%\config.ini
+SET CUSTOM_CONFIG_EMU2=%CURRENT_FOLDER%\%EMULATOR_2%\config.ini
 
 SET USER_AVD_PATH=%USERPROFILE%\.android\avd
 
