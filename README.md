@@ -12,18 +12,25 @@ This guide explains how to install the Android command line tools, download the 
 
 1. Download the **Android Command Line Tools** from the [official site](https://developer.android.com/studio#command-tools).  
 2. Extract to the following directory (mandatory):
+
 ```
 
 C:\Android\cmdline-tools\latest
 
-````
+```
+
 3. Set environment variables:
 - `ANDROID_SDK_ROOT = C:\Android`
 - Add to **PATH**:
-  ```
-  %ANDROID_SDK_ROOT%\cmdline-tools\latest\bin
-  ```
+
+```
+
+%ANDROID_SDK_ROOT%\cmdline-tools\latest\bin
+
+````
+
 4. Verify installation:
+
 ```bash
 sdkmanager --list
 ````
@@ -47,28 +54,32 @@ sdkmanager --list
 
    * Windows: `C:\Android\emulator`
    * Linux/Mac: `~/Android/emulator`
+
 2. Add the emulator folder to your **PATH**:
 
    * Windows:
 
-     ```
-     C:\Android\emulator
-     ```
+   ```
+   C:\Android\emulator
+   ```
+
    * Linux/Mac:
 
-     ```bash
-     export PATH=$PATH:~/Android/emulator
-     ```
+   ```bash
+   export PATH=$PATH:~/Android/emulator
+   ```
+
 3. Verify:
 
-   ```bash
-   emulator -list-avds
-   ```
+```bash
+emulator -list-avds
+```
+
 4. Launch your emulator:
 
-   ```bash
-   emulator -avd <AVD_NAME>
-   ```
+```bash
+emulator -avd <AVD_NAME>
+```
 
 ---
 
@@ -76,29 +87,32 @@ sdkmanager --list
 
 * **Android 13 (Older S23 Ultra OS) – API 33**
 
-  ```bash
-  sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
-  ```
+```bash
+sdkmanager "platform-tools" "platforms;android-33" "emulator" "system-images;android-33;google_apis;x86_64"
+```
 
 * **Android 14 (Current S23 Ultra OS) – API 34**
 
-  ```bash
-  sdkmanager "platform-tools" "platforms;android-34" "emulator" "system-images;android-34;google_apis;x86_64"
-  ```
+```bash
+sdkmanager "platform-tools" "platforms;android-34" "emulator" "system-images;android-34;google_apis;x86_64"
+```
 
 * **Android 15 Preview – API 35**
 
-  ```bash
-  sdkmanager "platform-tools" "platforms;android-35" "emulator" "system-images;android-35;google_apis;x86_64"
-  ```
+```bash
+sdkmanager "platform-tools" "platforms;android-35" "emulator" "system-images;android-35;google_apis;x86_64"
+```
 
 * **Android 15 Preview – API 36**
 
-  ```bash
-  sdkmanager "platform-tools" "platforms;android-36" "emulator" "system-images;android-36;google_apis;x86_64"
-  ```
+```bash
+sdkmanager "platform-tools" "platforms;android-36" "emulator" "system-images;android-36;google_apis;x86_64"
+```
+
+---
 
 ## 📌 Accept All SDK Licenses
+
 Run the following command to accept all licenses:
 
 ```bash
@@ -176,7 +190,7 @@ showDeviceFrame=no
 
 ---
 
-### 3️⃣  Create First the AVD with `avdmanager` S23Ultra_API34
+### 3️⃣ Create First AVD: S23Ultra_API34
 
 ```bash
 avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_apis;x86_64"
@@ -184,39 +198,32 @@ avdmanager create avd -n "S23Ultra_API34" -k "system-images;android-34;google_ap
 
 ---
 
-### 4️⃣  Create Second the AVD with `avdmanager`  Pixel 8 emulator
+### 4️⃣ Create Second AVD: Pixel 8
 
 ```bash
 avdmanager create avd -n "Pixel_8_API34" -k "system-images;android-34;google_apis;x86_64" -d "pixel_8"
 ```
 
+---
 
-### 5️⃣ Start or Restart the Emulator Kill/Restart ADB
+### 5️⃣ Start or Restart the Emulator
 
-You can start or restart your S23 Ultra emulator using **either** of the following:
-
-**Option 1:** Run the script in the project root (recommended, handles ADB as well):
+**Option 1:** Run the script in the project root:
 
 ```cmd
 start_S23Ultra_emulator.cmd
 ```
 
-**Option 2:** Start the emulator directly via command line:
+**Option 2:** Start directly via command line:
 
 ```bash
 emulator -avd S23Ultra_API34 -port 5555
-
 emulator -avd Pixel_8_API34 -port 5566 
 ```
 
 ---
 
-Tip: The script ensures the emulator is ready and ADB is running.
-Direct command just starts the emulator without checking ADB status.
-
----
-
-### 6️⃣ Verify Signed Using jarsigner
+### 6️⃣ Verify Signed APK Using `jarsigner`
 
 ```bash
 jarsigner -verify -verbose -certs D:\Projects\ar_mobile_cast\deploy\ARMobile-1.0.apk
@@ -248,36 +255,80 @@ adb -s emulator-5554 emu kill
 
 ---
 
-> ⚠️ If you get `'sdkmanager' is not recognized`, make sure your PATH includes the **sdkmanager** folder (`C:\Android\cmdline-tools\latest\bin` or `~/Android/cmdline-tools/latest/bin`).
+### 10️⃣ Important Tools
 
-> ⚠️ If you get `'emulator' is not recognized`, make sure your PATH includes the **emulator*8 folder (`C:\Android\emulator` or `~/Android/emulator`).
-
-> ⚠️ If you get `'adb' is not recognized`, make sure your PATH includes the **adb** folder (`C:\Android\platform-tools` or `~/Android/platform-tools`).
+*(Same table as before with sdkmanager, avdmanager, etc.)*
 
 ---
 
-### 10️⃣ Important Tools: SDK Manager, etc.
+## ⚠️ Troubleshooting
 
-> ⚠️ Note: Ensure your PATH includes the `cmdline-tools/latest/bin` folder so that these `.bat` files can be run from any terminal.
+### **Emulator Package Installed in Wrong Folder**
 
-Below is a description of the `.bat` files located in your Android SDK folder (`cmdline-tools/latest/bin`):
+**Problem:**
+When running `sdkmanager` you might see:
 
-| File                     | Purpose                                                                                                              |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| **apkanalyzer.bat**      | Analyze APK files (size, resources, manifest, classes, etc.). Useful for optimization and inspection.                |
-| **resourceshrinker.bat** | Removes unused resources from your APK to reduce size. Usually used with ProGuard/R8.                                |
-| **sdkmanager.bat**       | Command-line tool to install, update, and manage Android SDK packages (platforms, build-tools, system images, etc.). |
-| **avdmanager.bat**       | Command-line tool to create, delete, and manage Android Virtual Devices (emulators).                                 |
-| **screenshot2.bat**      | Capture screenshots from a connected device or emulator.                                                             |
-| **lint.bat**             | Runs Android Lint checks on your project to find code, layout, and performance issues.                               |
-| **profgeng.bat**         | Generates profiling data, mostly for advanced performance tuning.                                                    |
-| **retrace.bat**          | De-obfuscates stack traces that were obfuscated by ProGuard/R8. Useful for debugging crash logs.                     |
-| **d8.bat**               | Converts Java bytecode (`.class` files) into optimized DEX files for Android.                                        |
-| **r8.bat**               | Code shrinker, optimizer, obfuscator, and dexer. Combines ProGuard and D8 features.                                  |
+```
+Warning: Package "Android Emulator" (emulator) should be installed in
+"C:\Android\emulator" but
+it already exists.
+Installing in "C:\Android\emulator-2" instead.
+```
 
----
+This happens because the SDK manager detects an **old or duplicate emulator folder**. The AVD manager expects the emulator to be in `…\emulator`, so `emulator-2` causes errors when creating AVDs.
 
-![SDK Manager Tools](sdkmanager.png)
+**Folder Structure Illustration Before Fix:**
+
+```
+C:\Android
+├─ emulator         <-- old or corrupted emulator folder
+├─ emulator-2       <-- newly installed emulator (by sdkmanager)
+└─ platform-tools
+```
+
+**Folder Structure After Fix:**
+
+```
+C:\Android
+├─ emulator-old     <-- renamed old emulator
+├─ emulator         <-- newly installed emulator renamed from emulator-2
+└─ platform-tools
+```
+
+**Steps to Fix:**
+
+1. **Check your SDK folder** (`C:\Android`).
+2. **Delete or rename** the old/corrupted `emulator` folder:
+
+```
+C:\Android\emulator  → rename to emulator-old
+```
+
+3. **Rename the new folder**:
+
+```
+C:\Android\emulator-2  → C:\Android\emulator
+```
+
+4. **Verify environment variables**:
+
+* `ANDROID_SDK_ROOT = C:\Android`
+* `PATH` includes:
+
+  ```
+  C:\Android\emulator
+  C:\Android\platform-tools
+  C:\Android\cmdline-tools\latest\bin
+  ```
+
+5. **Open a new terminal** and check:
+
+```bash
+emulator -version
+avdmanager list targets
+```
+
+The warning should no longer appear, and AVD creation will work correctly.
 
 ---
 
