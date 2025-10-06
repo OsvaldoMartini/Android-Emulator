@@ -121,16 +121,42 @@ sdkmanager --licenses
 
 ---
 
-## 📱 Step 4: Galaxy S23 Ultra Specs
+## 📱 Step 4: Galaxy S23 Ultra / iPad 2025 / iPhone 17
 
 ![Galaxy S23 Ultra](galaxy-s23-ultra-4.png)
 ![iPhone 17](iPhone-17.png)
 ![iPad 2025](Apple-2025-iPad-3.png)
 
+### Galaxy S23 Ultra
+
+![Galaxy S23 Ultra](galaxy-s23-ultra-4.png)
+
 * **Screen size:** 6.8"
 * **Resolution:** 3088 × 1440 (QHD+)
 * **Density:** ~500+ ppi → `xxxhdpi (560 dpi)`
 * **CPU:** ARM64 (Snapdragon / Exynos), emulator uses `x86_64` system images for performance
+
+---
+
+### iPhone 17
+
+![iPhone 17](iPhone-17.png)
+
+* **Screen size:** 6.3"
+* **Resolution:** 2622 × 1206
+* **Density:** ~460 ppi → `xxxhdpi (460 dpi)`
+* **CPU:** Apple A19, emulator uses `x86_64` system images for performance
+
+---
+
+### iPad 2025
+
+![iPad 2025](Apple-2025-iPad-3.png)
+
+* **Screen size:** 11.0"
+* **Resolution:** 2360 × 1640
+* **Density:** ~264 ppi → `xxhdpi (264 dpi)`
+* **CPU:** Apple A16 Bionic, emulator uses `x86_64` system images for performance
 
 ---
 
