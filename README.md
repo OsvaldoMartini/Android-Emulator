@@ -124,7 +124,7 @@ sdkmanager --licenses
 ## 📱 Step 4: Galaxy S23 Ultra Specs
 
 ![Galaxy S23 Ultra](galaxy-s23-ultra-4.png)
-![iPad 2025](Apple-2025-iPad-2.png)
+![iPad 2025](Apple-2025-iPad-3.png)
 ![iPhone 17](iPhone-17.png)
 
 * **Screen size:** 6.8"
