@@ -263,7 +263,9 @@ adb -s emulator-5554 emu kill
 
 ## ⚠️ Troubleshooting
 
-### **Emulator Package Installed in Wrong Folder**
+---
+
+### 🔴1️⃣ **Emulator Package Installed in Wrong Folder**
 
 **Problem:**
 When running `sdkmanager` you might see:
@@ -298,41 +300,42 @@ C:\Android
 **Steps to Fix:**
 
 1. **Check your SDK folder** (`C:\Android`).
+
 2. **Delete or rename** the old/corrupted `emulator` folder:
 
-```
-C:\Android\emulator  → rename to emulator-old
-```
+   ```
+   C:\Android\emulator  → rename to emulator-old
+   ```
 
 3. **Rename the new folder**:
 
-```
-C:\Android\emulator-2  → C:\Android\emulator
-```
+   ```
+   C:\Android\emulator-2  → C:\Android\emulator
+   ```
 
 4. **Verify environment variables**:
 
-* `ANDROID_SDK_ROOT = C:\Android`
-* `PATH` includes:
+   * `ANDROID_SDK_ROOT = C:\Android`
+   * `PATH` includes:
 
-  ```
-  C:\Android\emulator
-  C:\Android\platform-tools
-  C:\Android\cmdline-tools\latest\bin
-  ```
+     ```
+     C:\Android\emulator
+     C:\Android\platform-tools
+     C:\Android\cmdline-tools\latest\bin
+     ```
 
 5. **Open a new terminal** and check:
 
-```bash
-emulator -version
-avdmanager list targets
-```
+   ```bash
+   emulator -version
+   avdmanager list targets
+   ```
 
 The warning should no longer appear, and AVD creation will work correctly.
 
 ---
 
-### **Emulator Hypervisor / Hardware Acceleration Not Installed**
+### 🔴2️⃣ **Emulator Hypervisor / Hardware Acceleration Not Installed**
 
 **Problem:**
 When starting the emulator, you might see:
@@ -448,4 +451,3 @@ Expected output should confirm that a hypervisor (Intel HAXM, KVM, Hyper-V, or A
 ---
 
 ✅ You now have a fully functional **Android Emulator mimicking the Galaxy S23 Ultra**, ready for testing and development.
-Ok Now I know
