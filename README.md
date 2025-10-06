@@ -355,20 +355,33 @@ This means the emulator cannot use **CPU virtualization** (Intel HAXM, Hyper-V, 
 
 #### 🪟 Windows
 
-1. Ensure **virtualization is enabled in BIOS/UEFI** (Intel VT-x or AMD-V).
+1. **Check if virtualization is enabled and compatible:**
 
-   * Reboot your PC, enter BIOS (e.g., F2/DEL key), enable virtualization.
-2. Install the **Android Emulator Hypervisor Driver**:
+   * Open **Task Manager → Performance tab → CPU**
+
+     * Look at the bottom-right → *Virtualization: Enabled*
+     * If it says *Disabled*, reboot into BIOS/UEFI and enable **Intel VT-x** or **AMD-V**.
+   * Alternatively, run in **Command Prompt (Admin):**
+
+     ```bash
+     systeminfo | find "Virtualization"
+     ```
+
+     If it shows `Virtualization Enabled In Firmware: Yes`, your CPU supports it and it’s turned on.
+2. Enable virtualization in **BIOS/UEFI** (Intel VT-x or AMD-V).
+
+   * Reboot your PC, press **F2/DEL/ESC** (varies by motherboard), and enable virtualization.
+3. Install the **Android Emulator Hypervisor Driver**:
 
    ```bash
    sdkmanager --install "extras;google;Android_Emulator_Hypervisor_Driver"
    ```
-3. Run the installer manually (if needed):
+4. Run the installer manually (if needed):
 
    ```
    C:\Android\extras\google\Android_Emulator_Hypervisor_Driver\silent_install.bat
    ```
-4. If using **Hyper-V / WSL2**, ensure Windows features are enabled:
+5. If using **Hyper-V / WSL2**, ensure Windows features are enabled:
 
    * "Hyper-V"
    * "Windows Hypervisor Platform"
