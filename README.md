@@ -350,26 +350,30 @@ This means the emulator cannot use **CPU virtualization** (Intel HAXM, Hyper-V, 
 
 ---
 
+Here’s the updated version with **✅ green check icons** for all OS-specific steps for a consistent look:
+
+---
+
 **Solutions by Operating System:**
 
 #### 🪟 Windows
 
-🔴1. Ensure **virtualization is enabled in BIOS/UEFI** (Intel VT-x or AMD-V).
+✅ 1. Ensure **virtualization is enabled in BIOS/UEFI** (Intel VT-x or AMD-V).
 
 * Check in Task Manager → Performance tab → *Virtualization: Enabled*
 * Or run:
 
-  ```bash
-  systeminfo | find "Virtualization"
-  ```
+```bash
+systeminfo | find "Virtualization"
+```
 
-🔴2. Install the **Android Emulator Hypervisor Driver** using `sdkmanager`:
+✅ 2. Install the **Android Emulator Hypervisor Driver** using `sdkmanager`:
 
 ```bash
 sdkmanager --install "extras;google;Android_Emulator_Hypervisor_Driver"
 ```
 
-🔴3. Run the installer directly from CMD (Admin):
+✅ 3. Run the installer directly from CMD (Admin):
 
 ```bash
 cd %ANDROID_SDK_ROOT%\extras\google\Android_Emulator_Hypervisor_Driver
@@ -382,7 +386,7 @@ If successful, it will print:
 The Hypervisor driver was successfully installed.
 ```
 
-🔴4. If the above fails, you can also install via **DISM** (built-in Windows tool):
+✅ 4. If the above fails, you can also install via **DISM** (built-in Windows tool):
 
 ```bash
 dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
@@ -392,7 +396,7 @@ dism.exe /Online /Enable-Feature:VirtualMachinePlatform /All
 
 Reboot your machine after enabling these.
 
-🔴5. Verify installation:
+✅ 5. Verify installation:
 
 ```bash
 emulator -accel-check
@@ -408,13 +412,13 @@ Hypervisor found and operational
 
 #### 🐧 Linux
 
-🔴1. Install **KVM (Kernel Virtual Machine)**:
+✅ 1. Install **KVM (Kernel Virtual Machine)**:
 
 ```bash
 sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
 ```
 
-🔴2. Check if KVM is working:
+✅ 2. Check if KVM is working:
 
 ```bash
 egrep -c '(vmx|svm)' /proc/cpuinfo
@@ -422,7 +426,7 @@ egrep -c '(vmx|svm)' /proc/cpuinfo
 
 A number >0 means virtualization is supported.
 
-🔴3. Add your user to the `kvm` group:
+✅ 3. Add your user to the `kvm` group:
 
 ```bash
 sudo usermod -aG kvm $USER
@@ -432,8 +436,8 @@ sudo usermod -aG kvm $USER
 
 #### 🍎 macOS
 
-🔴1. Virtualization is built-in (Hypervisor.framework).
-🔴2. Ensure you’re running the emulator with an **x86_64 image** or ARM (M1/M2 → use ARM images instead).
+✅ 1. Virtualization is built-in (Hypervisor.framework).
+✅ 2. Ensure you’re running the emulator with an **x86_64 image** or ARM (M1/M2 → use ARM images instead).
 
 ---
 
@@ -451,3 +455,5 @@ Expected output should confirm that a hypervisor (Intel HAXM, KVM, Hyper-V, or A
 ---
 
 ✅ You now have a fully functional **Android Emulator mimicking the Galaxy S23 Ultra**, ready for testing and development.
+
+---
