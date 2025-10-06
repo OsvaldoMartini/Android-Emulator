@@ -1,8 +1,8 @@
 # 📱 Android Command Line Tools & Galaxy S23 Ultra Emulator Setup
 
-![Android](./assets/images/android.png)
-![Platform Tools](./assets/images/platform-tools.png)
-![Emulator](./assets/images/emulator.png)
+![Android](android.png)
+![Platform Tools](platform-tools.png)
+![Emulator](emulator.png)
 
 This guide explains how to install the Android command line tools, download the Android Emulator, set up environment variables, and create an emulator that mimics the **Galaxy S23 Ultra**.
 
