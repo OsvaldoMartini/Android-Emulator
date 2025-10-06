@@ -333,3 +333,85 @@ The warning should no longer appear, and AVD creation will work correctly.
 ---
 
 ✅ You now have a fully functional **Android Emulator mimicking the Galaxy S23 Ultra**, ready for testing and development.
+Ok Now I know
+
+
+### **Emulator Hypervisor / Hardware Acceleration Not Installed**
+
+**Problem:**
+When starting the emulator, you might see:
+
+```
+ERROR | x86_64 emulation currently requires hardware acceleration!
+CPU acceleration status: Android Emulator hypervisor driver is not installed on this machine
+More info: https://developer.android.com/studio/run/emulator-acceleration#vm-windows
+```
+
+This means the emulator cannot use **CPU virtualization** (Intel HAXM, Hyper-V, or AMD Hypervisor), which is required for running x86/x86_64 system images.
+
+---
+
+**Solutions by Operating System:**
+
+#### 🪟 Windows
+
+1. Ensure **virtualization is enabled in BIOS/UEFI** (Intel VT-x or AMD-V).
+
+   * Reboot your PC, enter BIOS (e.g., F2/DEL key), enable virtualization.
+2. Install the **Android Emulator Hypervisor Driver**:
+
+   ```bash
+   sdkmanager --install "extras;google;Android_Emulator_Hypervisor_Driver"
+   ```
+3. Run the installer manually (if needed):
+
+   ```
+   C:\Android\extras\google\Android_Emulator_Hypervisor_Driver\silent_install.bat
+   ```
+4. If using **Hyper-V / WSL2**, ensure Windows features are enabled:
+
+   * "Hyper-V"
+   * "Windows Hypervisor Platform"
+   * "Virtual Machine Platform"
+
+---
+
+#### 🐧 Linux
+
+1. Install **KVM (Kernel Virtual Machine)**:
+
+   ```bash
+   sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+   ```
+2. Check if KVM is working:
+
+   ```bash
+   egrep -c '(vmx|svm)' /proc/cpuinfo
+   ```
+
+   A number >0 means virtualization is supported.
+3. Add your user to the `kvm` group:
+
+   ```bash
+   sudo usermod -aG kvm $USER
+   ```
+
+---
+
+#### 🍎 macOS
+
+1. Virtualization is built-in (Hypervisor.framework).
+2. Ensure you’re running the emulator with an **x86_64 image** or ARM (M1/M2 → use ARM images instead).
+
+---
+
+**Verify After Fix:**
+Run:
+
+```bash
+emulator -accel-check
+```
+
+Expected output should confirm that a hypervisor (Intel HAXM, KVM, Hyper-V, or Apple Hypervisor) is available and working.
+
+✅ You now have **hardware acceleration enabled**, and your emulator will start without the x86_64 error.
