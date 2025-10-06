@@ -246,6 +246,8 @@ start_S23Ultra_emulator.cmd
 
 ```bash
 emulator -avd S23Ultra_API34 -port 5555
+
+
 emulator -avd Pixel_8_API34 -port 5566 
 ```
 
