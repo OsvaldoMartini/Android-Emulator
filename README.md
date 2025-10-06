@@ -332,10 +332,6 @@ The warning should no longer appear, and AVD creation will work correctly.
 
 ---
 
-✅ You now have a fully functional **Android Emulator mimicking the Galaxy S23 Ultra**, ready for testing and development.
-Ok Now I know
-
-
 ### **Emulator Hypervisor / Hardware Acceleration Not Installed**
 
 **Problem:**
@@ -355,76 +351,86 @@ This means the emulator cannot use **CPU virtualization** (Intel HAXM, Hyper-V, 
 
 #### 🪟 Windows
 
-1. Ensure **virtualization is enabled in BIOS/UEFI** (Intel VT-x or AMD-V).
+🔴1. Ensure **virtualization is enabled in BIOS/UEFI** (Intel VT-x or AMD-V).
 
-   * Check in Task Manager → Performance tab → *Virtualization: Enabled*
-   * Or run:
+* Check in Task Manager → Performance tab → *Virtualization: Enabled*
+* Or run:
 
-     ```bash
-     systeminfo | find "Virtualization"
-     ```
-2. Install the **Android Emulator Hypervisor Driver** using `sdkmanager`:
+  ```bash
+  systeminfo | find "Virtualization"
+  ```
 
-   ```bash
-   sdkmanager --install "extras;google;Android_Emulator_Hypervisor_Driver"
-   ```
-3. Run the installer directly from CMD (Admin):
+🔴2. Install the **Android Emulator Hypervisor Driver** using `sdkmanager`:
 
-   ```bash
-   cd %ANDROID_SDK_ROOT%\extras\google\Android_Emulator_Hypervisor_Driver
-   silent_install.bat
-   ```
+```bash
+sdkmanager --install "extras;google;Android_Emulator_Hypervisor_Driver"
+```
 
-   If successful, it will print: `The Hypervisor driver was successfully installed.`
-4. If the above fails, you can also install via **DISM** (built-in Windows tool):
+🔴3. Run the installer directly from CMD (Admin):
 
-   ```bash
-   dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
-   dism.exe /Online /Enable-Feature:HypervisorPlatform /All
-   dism.exe /Online /Enable-Feature:VirtualMachinePlatform /All
-   ```
+```bash
+cd %ANDROID_SDK_ROOT%\extras\google\Android_Emulator_Hypervisor_Driver
+silent_install.bat
+```
 
-   Reboot your machine after enabling these.
-5. Verify installation:
+If successful, it will print:
 
-   ```bash
-   emulator -accel-check
-   ```
+```
+The Hypervisor driver was successfully installed.
+```
 
-   Output should confirm:
+🔴4. If the above fails, you can also install via **DISM** (built-in Windows tool):
 
-   ```
-   Hypervisor found and operational
-   ```
+```bash
+dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
+dism.exe /Online /Enable-Feature:HypervisorPlatform /All
+dism.exe /Online /Enable-Feature:VirtualMachinePlatform /All
+```
+
+Reboot your machine after enabling these.
+
+🔴5. Verify installation:
+
+```bash
+emulator -accel-check
+```
+
+Output should confirm:
+
+```
+Hypervisor found and operational
+```
 
 ---
 
 #### 🐧 Linux
 
-1. Install **KVM (Kernel Virtual Machine)**:
+🔴1. Install **KVM (Kernel Virtual Machine)**:
 
-   ```bash
-   sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
-   ```
-2. Check if KVM is working:
+```bash
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+```
 
-   ```bash
-   egrep -c '(vmx|svm)' /proc/cpuinfo
-   ```
+🔴2. Check if KVM is working:
 
-   A number >0 means virtualization is supported.
-3. Add your user to the `kvm` group:
+```bash
+egrep -c '(vmx|svm)' /proc/cpuinfo
+```
 
-   ```bash
-   sudo usermod -aG kvm $USER
-   ```
+A number >0 means virtualization is supported.
+
+🔴3. Add your user to the `kvm` group:
+
+```bash
+sudo usermod -aG kvm $USER
+```
 
 ---
 
 #### 🍎 macOS
 
-1. Virtualization is built-in (Hypervisor.framework).
-2. Ensure you’re running the emulator with an **x86_64 image** or ARM (M1/M2 → use ARM images instead).
+🔴1. Virtualization is built-in (Hypervisor.framework).
+🔴2. Ensure you’re running the emulator with an **x86_64 image** or ARM (M1/M2 → use ARM images instead).
 
 ---
 
@@ -438,3 +444,8 @@ emulator -accel-check
 Expected output should confirm that a hypervisor (Intel HAXM, KVM, Hyper-V, or Apple Hypervisor) is available and working.
 
 ✅ You now have **hardware acceleration enabled**, and your emulator will start without the x86_64 error.
+
+---
+
+✅ You now have a fully functional **Android Emulator mimicking the Galaxy S23 Ultra**, ready for testing and development.
+Ok Now I know
