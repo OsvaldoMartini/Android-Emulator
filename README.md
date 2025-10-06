@@ -355,37 +355,47 @@ This means the emulator cannot use **CPU virtualization** (Intel HAXM, Hyper-V, 
 
 #### 🪟 Windows
 
-1. **Check if virtualization is enabled and compatible:**
+1. Ensure **virtualization is enabled in BIOS/UEFI** (Intel VT-x or AMD-V).
 
-   * Open **Task Manager → Performance tab → CPU**
-
-     * Look at the bottom-right → *Virtualization: Enabled*
-     * If it says *Disabled*, reboot into BIOS/UEFI and enable **Intel VT-x** or **AMD-V**.
-   * Alternatively, run in **Command Prompt (Admin):**
+   * Check in Task Manager → Performance tab → *Virtualization: Enabled*
+   * Or run:
 
      ```bash
      systeminfo | find "Virtualization"
      ```
-
-     If it shows `Virtualization Enabled In Firmware: Yes`, your CPU supports it and it’s turned on.
-2. Enable virtualization in **BIOS/UEFI** (Intel VT-x or AMD-V).
-
-   * Reboot your PC, press **F2/DEL/ESC** (varies by motherboard), and enable virtualization.
-3. Install the **Android Emulator Hypervisor Driver**:
+2. Install the **Android Emulator Hypervisor Driver** using `sdkmanager`:
 
    ```bash
    sdkmanager --install "extras;google;Android_Emulator_Hypervisor_Driver"
    ```
-4. Run the installer manually (if needed):
+3. Run the installer directly from CMD (Admin):
+
+   ```bash
+   cd %ANDROID_SDK_ROOT%\extras\google\Android_Emulator_Hypervisor_Driver
+   silent_install.bat
+   ```
+
+   If successful, it will print: `The Hypervisor driver was successfully installed.`
+4. If the above fails, you can also install via **DISM** (built-in Windows tool):
+
+   ```bash
+   dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All
+   dism.exe /Online /Enable-Feature:HypervisorPlatform /All
+   dism.exe /Online /Enable-Feature:VirtualMachinePlatform /All
+   ```
+
+   Reboot your machine after enabling these.
+5. Verify installation:
+
+   ```bash
+   emulator -accel-check
+   ```
+
+   Output should confirm:
 
    ```
-   C:\Android\extras\google\Android_Emulator_Hypervisor_Driver\silent_install.bat
+   Hypervisor found and operational
    ```
-5. If using **Hyper-V / WSL2**, ensure Windows features are enabled:
-
-   * "Hyper-V"
-   * "Windows Hypervisor Platform"
-   * "Virtual Machine Platform"
 
 ---
 
