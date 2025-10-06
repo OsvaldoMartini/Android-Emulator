@@ -283,12 +283,30 @@ adb -s emulator-5554 emu kill
 
 ---
 
-### 10️⃣ Important Tools
+### 10️⃣ Important Tools: SDK Manager, etc.
 
-*(Same table as before with sdkmanager, avdmanager, etc.)*
+> ⚠️ Note: Ensure your PATH includes the `cmdline-tools/latest/bin` folder so that these `.bat` files can be run from any terminal.
+
+Below is a description of the `.bat` files located in your Android SDK folder (`cmdline-tools/latest/bin`):
+
+| File                     | Purpose                                                                                                              |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| **apkanalyzer.bat**      | Analyze APK files (size, resources, manifest, classes, etc.). Useful for optimization and inspection.                |
+| **resourceshrinker.bat** | Removes unused resources from your APK to reduce size. Usually used with ProGuard/R8.                                |
+| **sdkmanager.bat**       | Command-line tool to install, update, and manage Android SDK packages (platforms, build-tools, system images, etc.). |
+| **avdmanager.bat**       | Command-line tool to create, delete, and manage Android Virtual Devices (emulators).                                 |
+| **screenshot2.bat**      | Capture screenshots from a connected device or emulator.                                                             |
+| **lint.bat**             | Runs Android Lint checks on your project to find code, layout, and performance issues.                               |
+| **profgeng.bat**         | Generates profiling data, mostly for advanced performance tuning.                                                    |
+| **retrace.bat**          | De-obfuscates stack traces that were obfuscated by ProGuard/R8. Useful for debugging crash logs.                     |
+| **d8.bat**               | Converts Java bytecode (`.class` files) into optimized DEX files for Android.                                        |
+| **r8.bat**               | Code shrinker, optimizer, obfuscator, and dexer. Combines ProGuard and D8 features.                                  |
 
 ---
 
+![SDK Manager Tools](sdkmanager.png)
+
+---
 ## ⚠️ Troubleshooting
 
 ---
