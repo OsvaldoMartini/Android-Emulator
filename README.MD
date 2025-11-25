@@ -33,17 +33,17 @@ This guide explains how to install the Android command line tools, set up enviro
 
 ## 📌 Android Build Tools Setup - **Mandatory**
 
-Android Build-Tools are essential for Appium because they contain the utilities required to verify, sign, align, and optimize APK files. They are mandatory for Appium to start UiAutomator2 sessions and are not included in platform-tools.
+Android Build-Tools are essential for Appium because they contain the utilities required to verify, sign, align, and optimize APK files. They are mandatory for Appium to start **UiAutomator2** sessions and are not included in platform-tools.
 
 Appium relies on Build-Tools to:
 
-✔ verify the UiAutomator2 server APKs using tools such as **apksigner.jar** and **zipalign.exe**
+✔ verify the **UiAutomator2** server APKs using tools such as **apksigner.jar** and **zipalign.exe**
 
-✔ sign the uiautomator2-server and uiautomator2-server-debug-androidTest APKs
+✔ sign the **uiautomator2-server** and **uiautomator2-server-debug-androidTest** APKs
 
 ✔ install the automation APKs onto the device
 
-✔ ensure that APK signatures are valid and consistent
+✔ ensure that **APK signatures** are valid and consistent
 
 ✔ align and optimize APKs when required
 
@@ -53,7 +53,7 @@ Install the Build-Tools version that matches your target Android API level.
 
 ## ✅ What apksigner.bat Does
 
-apksigner.bat runs the Android APK signing tool, which is responsible for:
+**apksigner.bat** runs the Android APK **signing tool**, which is responsible for:
 
 ✔ Verifying APK signatures
 
@@ -67,9 +67,9 @@ Checks whether the APK is properly signed.
 ✔ Signing APK files
 
 Example:
-
+```bash
 apksigner sign --ks mykey.jks myapp.apk
-
+```
 
 Signs an APK with your keystore.
 
