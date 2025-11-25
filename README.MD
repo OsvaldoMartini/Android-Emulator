@@ -31,10 +31,90 @@ This guide explains how to install the Android command line tools, set up enviro
 
 ---
 
-## 📌 Android Build Tools Setup
+## 📌 Android Build Tools Setup - **Mandatory**
 
-Android **Build-Tools** are required by Appium to sign and verify the `uiautomator2-server` APKs (`apksigner.jar`, `zipalign`, etc.).
-Install the version that matches your target API level.
+Android Build-Tools are essential for Appium because they contain the utilities required to verify, sign, align, and optimize APK files. They are mandatory for Appium to start UiAutomator2 sessions and are not included in platform-tools.
+
+Appium relies on Build-Tools to:
+
+✔ verify the UiAutomator2 server APKs using tools such as **apksigner.jar** and **zipalign.exe**
+
+✔ sign the uiautomator2-server and uiautomator2-server-debug-androidTest APKs
+
+✔ install the automation APKs onto the device
+
+✔ ensure that APK signatures are valid and consistent
+
+✔ align and optimize APKs when required
+
+Install the Build-Tools version that matches your target Android API level.
+
+---
+
+## ✅ What apksigner.bat Does
+
+apksigner.bat runs the Android APK signing tool, which is responsible for:
+
+✔ Verifying APK signatures
+
+Example:
+```bash
+apksigner verify myapp.apk
+```
+
+Checks whether the APK is properly signed.
+
+✔ Signing APK files
+
+Example:
+
+apksigner sign --ks mykey.jks myapp.apk
+
+
+Signs an APK with your keystore.
+
+✔ Aligning + signing test APK used by Appium
+
+Appium uses it internally to sign:
+
+**uiautomator2-server.apk**
+
+**uiautomator2-server-debug-androidTest.apk**
+
+🚩 Without this, Appium cannot install its automation server on your Android device.
+
+## 📌 Why Appium Needs apksigner.bat
+
+Appium must verify the signature of the **UiAutomator2** server before it installs it.
+
+Your error:
+```bash
+Cannot verify the signature… Could not find apksigner.jar
+```
+
+🚩 This happens because Appium calls **apksigner.bat**, and if **Build-Tools** are missing, Appium fails to start the session.
+
+## 📂 Where apksigner.bat Lives
+
+After installing Build-Tools:
+
+```bash
+<ANDROID_HOME>\build-tools\<version>\apksigner.bat
+```
+
+Example:
+```bash
+C:\Android\build-tools\34.0.0\apksigner.bat
+```
+
+Inside build-tools\34.0.0\lib\ is the real tool:
+```bash
+apksigner.jar
+```
+
+The .bat file simply calls that .jar.
+
+---
 
 ### ✅ Build-Tools for Android 15 (Preview) – API 35
 
