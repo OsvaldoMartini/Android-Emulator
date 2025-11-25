@@ -116,7 +116,7 @@ The .bat file simply calls that .jar.
 
 ---
 
-📌 Installing Build-Tools
+## 📌 Installing Build-Tools
 
 ### ✅ Build-Tools for Android 15 (Preview) – API 35
 
